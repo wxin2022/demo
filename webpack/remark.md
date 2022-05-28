@@ -23,4 +23,8 @@ npm install webpack webpack-cli
 
 # 查看当前项目安装的版本号
 npx webpack -v
+
+
+webpack 默认的配置文件名为 webpack.config.js
+如果文件名不是这个，可使用 npx webpack  configFileName 进行打包
   
