@@ -27,4 +27,12 @@ npx webpack -v
 
 webpack 默认的配置文件名为 webpack.config.js
 如果文件名不是这个，可使用 npx webpack  configFileName 进行打包
-  
+
+# loader 是什么
+对某中特定文件的打包方案
+
+
+# file-loader 与 url-loader
+file-loader 打包的是文件地址，url-loader 打包可实现 大于某个大小时使用文件地址，否则打包成 base64
+
+# 打包样式，style-loader css-loader  --save-dev
