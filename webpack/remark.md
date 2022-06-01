@@ -36,3 +36,18 @@ webpack 默认的配置文件名为 webpack.config.js
 file-loader 打包的是文件地址，url-loader 打包可实现 大于某个大小时使用文件地址，否则打包成 base64
 
 # 打包样式，style-loader css-loader  --save-dev
+
+# 使用插件
+
+npm install html-webpack-plugin --save-dev
+作用：打包结束后自动生成一个html文件，并把打包后的js文件自动引入到html中
+
+npm install clean-webpack-plugin --save-dev
+作用：打包时先清理 dist目录下所有内容， 
+使用方式： const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+
+# 常用配置项
+1. entry  => main , sub 
+   output: => filename: '[name].js'
+
+2. publicPath  打包后的js配置统一前缀

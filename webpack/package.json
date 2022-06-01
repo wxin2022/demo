@@ -10,6 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^10.4.7",
+    "clean-webpack-plugin": "^4.0.0",
+    "html-webpack-plugin": "^5.5.0",
     "node-sass": "^7.0.1",
     "postcss-loader": "^7.0.0",
     "sass-loader": "^13.0.0",

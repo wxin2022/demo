@@ -1,10 +1,18 @@
-const path = require('path')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  mode: 'production', // development 不会压缩打包后的代码
-  entry: './src/index.js',
+  mode: 'development', // production，| development 不会压缩打包后的代码
+  // entry: './src/index.js',  // 下面也一样
+  entry: {
+    main: './src/index.js',
+    sub: './src/test.js'
+  },
   output: {
-    filename: 'main.js',
+    publicPath: 'http://www.jscode.space',
+    // filename: 'main.js',
+    filename: '[name].[hash].js', // name 为 'main' & 'sub'
     path: path.resolve(__dirname, 'dist')
   },
   module: {
@@ -34,5 +42,11 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader']
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    }),
+    new CleanWebpackPlugin()
+  ]
 }
