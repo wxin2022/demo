@@ -10,10 +10,19 @@ module.exports = {
     sub: './src/test.js'
   },
   output: {
-    publicPath: 'http://www.jscode.space',
+    publicPath: '/', // http://www.jscode.space
     // filename: 'main.js',
     filename: '[name].[hash].js', // name 为 'main' & 'sub'
     path: path.resolve(__dirname, 'dist')
+  },
+  devtool: 'inline-cheap-module-source-map', // 'none' inline-source-map
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'public'),
+    },
+    // static: './dist',
+    compress: true,
+    open: true, // 自动打开浏览器
   },
   module: {
     rules: [
@@ -25,7 +34,7 @@ module.exports = {
           options: {
             name: '[name]—[hash].[ext]', // name 是原文件名， ext 是文件扩展名
             // outputPath: path.resolve(__dirname, 'dist/images')
-            outputPath: '/images',
+            outputPath: 'images',
             limit: 102400 // 单位 B , 大于这个值 打包成 url, 否则打包成 base64
           }
         }
