@@ -24,7 +24,7 @@ module.exports = {
     // static: './dist',
     compress: true,
     // open: true, // 自动打开浏览器
-    hot: 'only',
+    hot: true,
     
   },
   module: {
@@ -52,6 +52,50 @@ module.exports = {
         // loader 的执行顺序： 从下到上（从右到左）， 不能混乱，
         // sass-loader 解析的值交给 css-loader， css-loader 解析后的值 再交给 style-loader
         use: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader']
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/, // 必须为正则表达式
+        // use: {
+        //   loader: 'babel-loader',
+        //   options: {
+        //     // presets: ['@babel/preset-env'],
+        //     // plugins: ['@babel/plugin-transform-runtime']
+        //     "plugins": [
+        //       [
+        //         "@babel/plugin-transform-runtime",
+        //         {
+        //           "absoluteRuntime": false,
+        //           "corejs": 2,
+        //           "helpers": true,
+        //           "regenerator": true,
+        //           "useESModules": true,
+        //         }
+        //       ]
+        //     ]
+        //   }
+        // },
+        loader: 'babel-loader',
+        options: {
+          // 语法转换
+          // presets: [['@babel/preset-env', {
+          //   // 加上 usage 可时 babel/polyfill 只添加业务代码里面存在的语法，减小打包体积
+          //   useBuiltIns: 'usage'
+          // }]]
+
+          // "plugins": [
+          //   [
+          //     "@babel/plugin-transform-runtime",
+          //     {
+          //       "absoluteRuntime": false,
+          //       "corejs": 2,
+          //       "helpers": true,
+          //       "regenerator": true,
+          //       "useESModules": true,
+          //     }
+          //   ]
+          // ]
+        }
       }
     ]
   },
@@ -60,7 +104,7 @@ module.exports = {
       template: 'src/index.html'
     }),
 
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
 
     // new webpack.HotModuleReplacementPlugin()  5.0 版本 HMR 不需要插件
   ]

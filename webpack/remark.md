@@ -84,4 +84,55 @@ npm install clean-webpack-plugin --save-dev
 + 不能使用多个entry 文件 (？)
 **weapck4需要new webpack.HotModuleReplacement插件，5不需要**
 
+# 使用 babel preset-env
++ ?. 语法在 edge 不支持
+
+1. npm install babel-loader @babel/core --save-dev
+
+2. rules => .js$  使用 babel-loader
+
++ . npm install @babel/preset-env --save-dev // 语法解析
+  加到 loader options 
+
++ . npm install @babel/polyfill --save-dev // 语法补充
+  加到业务代码顶部即可
+  npm install core-js@2 --save
+  **特别地：使用 @babel/preset-env 时加上 useBuiltIns usage**
+
+```
+options: {
+  presets: [['@babel/preset-env', {
+    // 加上 usage 可时 babel/polyfill 只添加业务代码里面存在的语法，减小打包体积
+    useBuiltIns: 'usage'
+  }]]
+}
+```  
+
+# 使用 babel plugin 
+1. npm install --save-dev @babel/plugin-transform-runtime
+   npm install --save @babel/runtime-corejs2
+2. loader options, 添加 plugin
+
+3. 使用plugin 方式，业务代码不需要 import @babel/polyfill
+
+```
+options: {
+  "plugins": [
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "absoluteRuntime": false,
+        "corejs": 2,
+        "helpers": true,
+        "regenerator": true,
+        "useESModules": true,
+      }
+    ]
+  ]
+}
+```
+
+# 注意： webpack5 loader的 exclude 只能为 正则表达式
+  
+
 
