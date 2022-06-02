@@ -78,4 +78,10 @@ npm install clean-webpack-plugin --save-dev
 2. 编写 myserver.js
 3. 启动 node myserver.js
 
+# 使用 HMR
++ devServer => hot: true
++ output => publicPath: '/'
++ 不能使用多个entry 文件 (？)
+**weapck4需要new webpack.HotModuleReplacement插件，5不需要**
+
 

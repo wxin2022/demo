@@ -1,18 +1,19 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack')
 
 module.exports = {
   mode: 'development', // production，| development 不会压缩打包后的代码
-  // entry: './src/index.js',  // 下面也一样
-  entry: {
-    main: './src/index.js',
-    sub: './src/test.js'
-  },
+  entry: './src/index.js',  // 下面也一样
+  // entry: {
+  //   main: './src/index.js',
+  //   ttt: './src/test.js' // 可以为任意名字
+  // },
   output: {
-    publicPath: '/', // http://www.jscode.space
-    // filename: 'main.js',
-    filename: '[name].[hash].js', // name 为 'main' & 'sub'
+    publicPath: '/', // http://www.jscode.space, 热更新需要定位为/ ?
+    filename: 'main.js',
+    // filename: '[name].js', // name 为 'main' & 'sub'
     path: path.resolve(__dirname, 'dist')
   },
   devtool: 'inline-cheap-module-source-map', // 'none' inline-source-map
@@ -22,7 +23,9 @@ module.exports = {
     },
     // static: './dist',
     compress: true,
-    open: true, // 自动打开浏览器
+    // open: true, // 自动打开浏览器
+    hot: 'only',
+    
   },
   module: {
     rules: [
@@ -56,6 +59,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
-    new CleanWebpackPlugin()
+
+    new CleanWebpackPlugin(),
+
+    // new webpack.HotModuleReplacementPlugin()  5.0 版本 HMR 不需要插件
   ]
 }

@@ -2,3 +2,9 @@ img {
   width: 280px;
   height: 280px;
 }
+
+.div-item {
+  color: red;
+  /* color: blue; */
+  background-color: #ccc;
+}
