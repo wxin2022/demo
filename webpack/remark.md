@@ -95,7 +95,7 @@ npm install clean-webpack-plugin --save-dev
   加到 loader options 
 
 + . npm install @babel/polyfill --save-dev // 语法补充
-  加到业务代码顶部即可
+  // 基本高版本的webpack不再需要在业务代码引入 polyfill 内容
   npm install core-js@2 --save
   **特别地：使用 @babel/preset-env 时加上 useBuiltIns usage**
 
@@ -111,6 +111,7 @@ options: {
 # 使用 babel plugin 
 1. npm install --save-dev @babel/plugin-transform-runtime
    npm install --save @babel/runtime-corejs2
+    npm install --save core-js@2
 2. loader options, 添加 plugin
 
 3. 使用plugin 方式，业务代码不需要 import @babel/polyfill
@@ -133,6 +134,17 @@ options: {
 ```
 
 # 注意： webpack5 loader的 exclude 只能为 正则表达式
-  
+
+# tree shaking 
+  只支持 es module 模块引入，不打包没有import的
+```  
+optimization: {
+  usedExports: true
+},
+
+package.json:
+"sideEffects": false, // "sideEffects": ['*.css']
+```
++ production 模式下默认配置了 tree shaking
 
 

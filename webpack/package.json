@@ -1,6 +1,7 @@
 {
   "name": "webpack-demo",
   "version": "1.0.0",
+  "sideEffects": false,
   "description": "webpakc study",
   "main": "index.js",
   "scripts": {
@@ -12,28 +13,29 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.18.2",
-    "babel-loader": "^8.2.5",
-    "@babel/preset-env": "^7.18.2",
     "@babel/plugin-transform-runtime": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
     "autoprefixer": "^10.4.7",
+    "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
     "express": "^4.18.1",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "node-sass": "^7.0.1",
     "postcss-loader": "^7.0.0",
     "sass-loader": "^13.0.0",
+    "style-loader": "^3.3.1",
+    "url-loader": "^4.1.1",
     "webpack-cli": "^4.9.2",
     "webpack-dev-middleware": "^5.3.3",
-    "webpack-dev-server": "^4.9.1",
-    "css-loader": "^6.7.1",
-    "file-loader": "^6.2.0",
-    "style-loader": "^3.3.1",
-    "url-loader": "^4.1.1"
+    "webpack-dev-server": "^4.9.1"
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "@babel/runtime": "^7.2.0",
     "@babel/runtime-corejs2": "^7.18.3",
+    "core-js": "^2.6.12",
     "webpack": "^5.72.1"
   }
 }

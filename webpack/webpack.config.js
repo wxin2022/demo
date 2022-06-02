@@ -11,7 +11,7 @@ module.exports = {
   //   ttt: './src/test.js' // 可以为任意名字
   // },
   output: {
-    publicPath: '/', // http://www.jscode.space, 热更新需要定位为/ ?
+    publicPath: './', // http://www.jscode.space, 热更新需要定位为/ ?
     filename: 'main.js',
     // filename: '[name].js', // name 为 'main' & 'sub'
     path: path.resolve(__dirname, 'dist')
@@ -56,32 +56,13 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /(node_modules)/, // 必须为正则表达式
-        // use: {
-        //   loader: 'babel-loader',
-        //   options: {
-        //     // presets: ['@babel/preset-env'],
-        //     // plugins: ['@babel/plugin-transform-runtime']
-        //     "plugins": [
-        //       [
-        //         "@babel/plugin-transform-runtime",
-        //         {
-        //           "absoluteRuntime": false,
-        //           "corejs": 2,
-        //           "helpers": true,
-        //           "regenerator": true,
-        //           "useESModules": true,
-        //         }
-        //       ]
-        //     ]
-        //   }
-        // },
         loader: 'babel-loader',
         options: {
           // 语法转换
-          // presets: [['@babel/preset-env', {
-          //   // 加上 usage 可时 babel/polyfill 只添加业务代码里面存在的语法，减小打包体积
-          //   useBuiltIns: 'usage'
-          // }]]
+          presets: [['@babel/preset-env', {
+            // 加上 usage 可时 babel/polyfill 只添加业务代码里面存在的语法，减小打包体积
+            useBuiltIns: 'usage'
+          }]]
 
           // "plugins": [
           //   [
@@ -98,6 +79,9 @@ module.exports = {
         }
       }
     ]
+  },
+  optimization: {
+    usedExports: true
   },
   plugins: [
     new HtmlWebpackPlugin({
