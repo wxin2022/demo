@@ -24,3 +24,10 @@
 + ctrl + shift + l   选中和当前拼写一致的所有单词（不区分大小写）
 
 + ctrl + g  跳转指定行
+
++ ctrl +  + 编辑器放大
++ ctrl + - 缩小
+
++ ctrl + left  按词语跳转
+
++ ctrl + shift + left 按词语选中
