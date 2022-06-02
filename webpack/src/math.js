@@ -1,3 +1,6 @@
+import $ from 'jquery'
+console.log($)
+
 function add(a, b) {
     const div = document.createElement('div')
     div.innerText = `计算加法：${a} + ${b} = ${a + b}`

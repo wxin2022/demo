@@ -147,4 +147,17 @@ package.json:
 ```
 + production 模式下默认配置了 tree shaking
 
+# code splitting
++ 对代码进行拆分，提高加载速度（浏览器可以同时并行加载多个文件）
++ 使用 chunks 时 output filename 必须以占位符形式，不能为固定名字
+```
+optimization: {
+    splitChunks: {
+        chunks: 'all'
+    }
+}
+```
+
+ Multiple chunks emit assets to the same filename main.js 表示打包生成了多个文件，名字但是只有一个，所以要将output 输出的名字定义成占位符形式
+
 
