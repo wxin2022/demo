@@ -13,7 +13,6 @@ import { loadElement } from './async-load'
 
 add()
 
-
 console.log(snow) // 路径
 
 const img = new Image()
@@ -27,7 +26,7 @@ new Content()
 const a = 'inde.xjs'
 
 document.body.addEventListener('click', () => {
-  console.log('点击body')
+  console.log('点击body事件')
   loadElement().then(({ $, num }) => {
     $('#root').append(`<div>${num}</div>`)
   })

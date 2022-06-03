@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const webpack = require('webpack');
 
 module.exports = {
     entry: {
@@ -9,19 +10,30 @@ module.exports = {
     },
     output: {
         publicPath: '/',
-        filename: '[name].js',
-        chunkFilename: '[name].chunk.js',
+
+        // contenthash 与 hash 的区别： hash是本次打包所有文件统一的值
+        // contenthash 根据内容生成的一个hash值， 代码不变时（如第三方代码），生成的hash值不变
+        filename: '[name].[contenthash].js', 
+        chunkFilename: '[name].chunk.[contenthash].js',
         path: path.resolve(__dirname, '../dist') // 以当前配置文件所在文件为标准
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: 'src/index.html'
         }),
-        // new CleanWebpackPlugin(),
+        new CleanWebpackPlugin(),
 
         new MiniCssExtractPlugin({
           filename: '[name].css',
           chunkFilename: '[name].chunk.css'
+        }),
+        
+        // 定义后js中使用 $ 时无需再import
+        new webpack.ProvidePlugin({
+          $: 'jquery',
+
+          // 定义 jquery的 trim 属性作为 $trim
+          $trim: ['jquery', 'trim'] 
         })
     ],
     module: {

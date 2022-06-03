@@ -220,6 +220,33 @@ sideEffects: ["*.css", "*.scss"]
   },
 ```
 
+# contenthash 与 hash 的区别：
++ hash是本次打包所有文件统一的值
++ contenthash 根据内容生成的一个hash值， 代码不变时（如第三方代码），生成的hash值不变
+
+# shimming
+
+```
+// 定义后js中使用 $ 时无需再import
+new webpack.ProvidePlugin({
+  $: 'jquery',
+
+  // 定义 jquery的 trim 属性作为 $trim
+  $trim: ['jquery', 'trim'] 
+})
+```
+
+### 模块中的 this 默认为 undefined
++ 改变模块中的 this， 可使用 import-loader 
+在js 的loader 中添加如下代码，可实现将 this 指向 window对象
+```
+loader: imports-loader?this=>window
+```
+
+# 使用 -- 可以为 npm scripts 拼接额外的内容. 注意 -- 后面的空格
++ 例： npm run dev -- --open // 相当于在script 后面追加内容 --open
+
+
 
 
 
