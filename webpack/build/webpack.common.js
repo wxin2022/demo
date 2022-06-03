@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: {
@@ -9,13 +10,19 @@ module.exports = {
     output: {
         publicPath: '/',
         filename: '[name].js',
+        chunkFilename: '[name].chunk.js',
         path: path.resolve(__dirname, '../dist') // 以当前配置文件所在文件为标准
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: 'src/index.html'
         }),
-        new CleanWebpackPlugin(),
+        // new CleanWebpackPlugin(),
+
+        new MiniCssExtractPlugin({
+          filename: '[name].css',
+          chunkFilename: '[name].chunk.css'
+        })
     ],
     module: {
         rules: [
@@ -32,11 +39,12 @@ module.exports = {
           },
           {
             test: /\.css$/,
-            use: ['style-loader', 'css-loader']
+            // use: ['style-loader', 'css-loader']
+            use: [MiniCssExtractPlugin.loader, 'css-loader']
           },
           {
             test: /\.scss$/,
-            use: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader']
+            use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader', 'postcss-loader']
           },
           {
             test: /\.js$/,

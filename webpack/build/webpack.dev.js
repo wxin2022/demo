@@ -13,7 +13,7 @@ const devConfig = {
     hot: true,
   },
   optimization: {
-    usedExports: true
+    usedExports: true // tree s
   }
 }
 

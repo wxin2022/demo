@@ -9,6 +9,8 @@ import Content from './content'
 
 import { add } from  './math.js'
 
+import { loadElement } from './async-load'
+
 add()
 
 
@@ -24,4 +26,9 @@ new Content()
 
 const a = 'inde.xjs'
 
-export default {}
+document.body.addEventListener('click', () => {
+  console.log('点击body')
+  loadElement().then(({ $, num }) => {
+    $('#root').append(`<div>${num}</div>`)
+  })
+})

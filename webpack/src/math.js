@@ -1,5 +1,5 @@
-import $ from 'jquery'
-console.log($)
+// import $ from 'jquery'
+// console.log($)
 
 function add(a, b) {
     const div = document.createElement('div')

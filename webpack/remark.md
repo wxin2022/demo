@@ -153,11 +153,73 @@ package.json:
 ```
 optimization: {
     splitChunks: {
-        chunks: 'all'
+        chunks: 'all' // async 只分割同步代码
     }
 }
 ```
 
  Multiple chunks emit assets to the same filename main.js 表示打包生成了多个文件，名字但是只有一个，所以要将output 输出的名字定义成占位符形式
+
+ + 动态使用 import 时，如果语法不支持时可使用插件 @babel/plugin-syntax-dynamic-import
+
+ ```
+{
+  chunks: 'async', // all  async
+  minSize: 20000, // 模块达到这个大小才分割
+  minRemainingSize: 0,
+  minChunks: 1, // 使用 次数 达到才分割
+  maxAsyncRequests: 30, // 
+  maxInitialRequests: 30,
+  enforceSizeThreshold: 50000,
+  cacheGroups: {
+    defaultVendors: {
+      test: /[\\/]node_modules[\\/]/,
+      priority: -10, // 与下面配置的相比较，优先级
+      reuseExistingChunk: true,
+    },
+    default: {
+      minChunks: 2,
+      priority: -20,
+      reuseExistingChunk: true,
+    },
+}
+ ```
+
+ # webpackPrefetch 与 webpackPreload
+ + preload 是与主资源同时价值， prefetch 是主资源加载好之后才加载
+ ```
+  // 等待主资源以及网络带宽加载释放后才加载， 推荐使用
+  const { default: $ } = await import(/* webpackPrefetch: true */ 'jquery')
+  const num = Math.random()
+  return { $, num }
+ ```
+
+# chunkFilename 与 filename
++ 通过entry 入口打包的使用 filename,  第三方依赖等使用 chunkFilename
+
+
+ # css 代码分割
+css 文件默认是打包进js
+1. npm install mini-css-extract-plugin --save-dev
+2. 引入 plugin
+3. 将 style-loader 替换为 (mini-css-extract-plugin).loader
+4. 使用 tree sh 时 ，package.json  sideEffects 需要添加排除文件
+```
+sideEffects: ["*.css", "*.scss"]
+```
+
+# 压缩css
+1. npm install css-minimizer-webpack-plugin -D
+```
+ optimization: {
+    minimizer: [
+      // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
+      // `...`,
+      new CssMinimizerPlugin(),
+    ],
+  },
+```
+
+
 
 
