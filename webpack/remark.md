@@ -247,6 +247,35 @@ loader: imports-loader?this=>window
 + 例： npm run dev -- --open // 相当于在script 后面追加内容 --open
 
 
+# 打包 library
++ 打包库文件需要解决的是不同引用方式均可使用该库
+```
+import xx from 'xx' // ES
+
+const xx = require('xx')  // comm js
+
+require(['xx'], function() {
+
+})
+
+<script scr="xx.js"></srcipt>
+xx.funs()
+```
+1. 配置 output => libraryTarget: 'umd' 实现通用的模块引入
+2. 配置 output => library: 'xx' 实现通过script标签，引入作为全局变量， xx 是全局变量名
+
++ libraryTarget = 'window' 并且 library: 'xx' 通过 script标签引入后显示 将 xx 挂载到 window对象中
+
++ externals: 'jquery',  可忽略打包时的第三方模块
+
+# 提交至 npm 仓库
+1. 注册账号
+2. npm login
+3. npm publish
+4. npm install （package.json 中 name 属性 为 npm install 安装时的包名（不能与npm现有重复））
+
+
+
 
 
 
