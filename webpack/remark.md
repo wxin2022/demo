@@ -274,6 +274,28 @@ xx.funs()
 3. npm publish
 4. npm install （package.json 中 name 属性 为 npm install 安装时的包名（不能与npm现有重复））
 
+# PWA (progressive web application)
++ 断网情况下可以通过缓存访问
+
+1. npm install workbox-webpack-plugin --save-dev
+
+2. webpack plugin
+  new WorkboxPlugin.GenerateSW({
+    clientsClaim: true,
+    skipWaiting: true
+  })
+
+3. 业务代码编辑
+```
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorder.register('')
+  })
+}
+```
+
+
+
 
 
 
