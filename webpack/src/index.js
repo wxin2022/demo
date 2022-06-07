@@ -31,3 +31,16 @@ document.body.addEventListener('click', () => {
     $('#root').append(`<div>${num}</div>`)
   })
 })
+
+// 加载 pwa
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js')
+    .then(r => {
+      console.log('pwa 启动')
+    })
+    .catch(err => {
+      console.log('pwa启动失败', err)
+    })
+  })
+}

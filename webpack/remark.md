@@ -289,10 +289,18 @@ xx.funs()
 ```
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorder.register('')
+    navigator.serviceWorder.register('service-worker.js')
+    .then(r => {
+      console.log('pwa 启动')
+    })
+    .catch( err => {
+      console.log('pwa启动失败', err)
+    })
   })
 }
 ```
+* npm install http-server -D 
+* script => http-server dist or  npx http-server dist
 
 
 
