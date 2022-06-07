@@ -11,6 +11,9 @@ import { add } from  './math.js'
 
 import { loadElement } from './async-load'
 
+import user from './test.ts'
+user.say(22)
+
 add()
 
 console.log(snow) // 路径

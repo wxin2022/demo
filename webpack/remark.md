@@ -99,7 +99,7 @@ npm install clean-webpack-plugin --save-dev
   npm install core-js@2 --save
   **特别地：使用 @babel/preset-env 时加上 useBuiltIns usage**
 
-```
+```js
 options: {
   presets: [['@babel/preset-env', {
     // 加上 usage 可时 babel/polyfill 只添加业务代码里面存在的语法，减小打包体积
@@ -116,7 +116,7 @@ options: {
 
 3. 使用plugin 方式，业务代码不需要 import @babel/polyfill
 
-```
+```js
 options: {
   "plugins": [
     [
@@ -137,7 +137,7 @@ options: {
 
 # tree shaking 
   只支持 es module 模块引入，不打包没有import的
-```  
+```js
 optimization: {
   usedExports: true
 },
@@ -150,7 +150,7 @@ package.json:
 # code splitting
 + 对代码进行拆分，提高加载速度（浏览器可以同时并行加载多个文件）
 + 使用 chunks 时 output filename 必须以占位符形式，不能为固定名字
-```
+```js
 optimization: {
     splitChunks: {
         chunks: 'all' // async 只分割同步代码
@@ -162,7 +162,7 @@ optimization: {
 
  + 动态使用 import 时，如果语法不支持时可使用插件 @babel/plugin-syntax-dynamic-import
 
- ```
+ ```js
 {
   chunks: 'async', // all  async
   minSize: 20000, // 模块达到这个大小才分割
@@ -204,13 +204,13 @@ css 文件默认是打包进js
 2. 引入 plugin
 3. 将 style-loader 替换为 (mini-css-extract-plugin).loader
 4. 使用 tree sh 时 ，package.json  sideEffects 需要添加排除文件
-```
+```js
 sideEffects: ["*.css", "*.scss"]
 ```
 
 # 压缩css
 1. npm install css-minimizer-webpack-plugin -D
-```
+```js
  optimization: {
     minimizer: [
       // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
@@ -226,7 +226,7 @@ sideEffects: ["*.css", "*.scss"]
 
 # shimming
 
-```
+```js
 // 定义后js中使用 $ 时无需再import
 new webpack.ProvidePlugin({
   $: 'jquery',
@@ -249,7 +249,7 @@ loader: imports-loader?this=>window
 
 # 打包 library
 + 打包库文件需要解决的是不同引用方式均可使用该库
-```
+```js
 import xx from 'xx' // ES
 
 const xx = require('xx')  // comm js
@@ -286,7 +286,7 @@ xx.funs()
   })
 
 3. 业务代码编辑
-```
+```js
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorder.register('service-worker.js')
@@ -301,6 +301,36 @@ if ('serviceWorker' in navigator) {
 ```
 * npm install http-server -D 
 * script => http-server dist or  npx http-server dist
+
+# TypeScript 打包
+1. npm install ts-loader typescript --save-dev
+2. 使用loader
+```js
+rules: [
+  {
+    test: /\.tsx?$/,
+    use: 'ts-loader',
+    exclude: /(node_modules)/
+  }
+]
+```
+3. 创建tsconfig.json
+```json
+{
+  "compilerOpitons": {
+    "module": "es6", // 模块引入方式
+    "target": "es5", // 生成es5语法
+    "allowJs": true, // 允许js
+  }
+}
+```
+
+# 在 ts 中引入第三方库
+* 如使用 jquery 需要安装 该库的 ts 代码解析 依赖才能正常提示错误
+  npm install @types/jquery --save-dev
+* 引入库时需要使用 as
+  import * as jquery from 'jquery'
+
 
 
 

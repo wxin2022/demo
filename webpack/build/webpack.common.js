@@ -67,6 +67,11 @@ module.exports = {
                 useBuiltIns: 'usage'
               }]]
             }
+          },
+          {
+            test: /\.tsx?$/,
+            exclude: /(node_modules)/,
+            loader: 'ts-loader'
           }
         ]
     },
