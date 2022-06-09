@@ -7,11 +7,11 @@ import './style/index.css'
 import './style/content.scss'
 import Content from './content'
 
-import { add } from  './math.js'
+import { add } from  '@/math.js'
 
 import { loadElement } from './async-load'
 
-import user from './test.ts'
+import user from './user'
 user.say(22)
 
 add()

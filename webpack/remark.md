@@ -354,6 +354,17 @@ Standard: https://github.com/standard/standard // 27k
 Google: https://github.com/google/eslint-config-google // 1.6k
 XO: https://github.com/xojs/eslint-config-xo
 
+# webpack 性能优化
+
+* 升级 node, webpack npm 版本
+
+* loader 排除无关目录，如 node_modules
+
+* 慎用第三方 plugin
+
+# resolve
+extensions  引入文件时可自动匹配的扩展名
+
 
 
 

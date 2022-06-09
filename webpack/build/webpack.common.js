@@ -17,6 +17,12 @@ module.exports = {
         chunkFilename: '[name].chunk.[contenthash].js',
         path: path.resolve(__dirname, '../dist') // 以当前配置文件所在文件为标准
     },
+    resolve: {
+      extensions: ['.js', 'json', '.ts'],
+      alias: {
+        '@': path.resolve(__dirname, '../src')
+      }
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: 'src/index.html'
