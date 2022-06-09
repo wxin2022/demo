@@ -348,6 +348,12 @@ rules: [
 
 * vs code 安装 eslint 插件后可直接提示
 
+# 常用eslint 标准
+Airbnb: https://github.com/airbnb/javascript  // 124k star
+Standard: https://github.com/standard/standard // 27k
+Google: https://github.com/google/eslint-config-google // 1.6k
+XO: https://github.com/xojs/eslint-config-xo
+
 
 
 
