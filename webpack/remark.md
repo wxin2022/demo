@@ -365,6 +365,12 @@ XO: https://github.com/xojs/eslint-config-xo
 # resolve
 extensions  引入文件时可自动匹配的扩展名
 
+# 打包性能提升之第三方模块打包
+1. add-asset-html-webpack-plugin
+2. dll-plugin
+
+
+
 
 
 
