@@ -331,6 +331,23 @@ rules: [
 * 引入库时需要使用 as
   import * as jquery from 'jquery'
 
+# 配置 eslint
+* npm install eslint --save-dev
+
+* npx eslint --init
+
+* npx eslint src
+  检测 src 目录下面的代码是否符合配置的规范
+  
+* 使用 babel-eslint 解析器
+  npm install babel-eslint
+  .eslintrc.js
+  {
+    parser: 'babel-eslint'
+  }
+
+* vs code 安装 eslint 插件后可直接提示
+
 
 
 
