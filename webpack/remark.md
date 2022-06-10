@@ -369,6 +369,9 @@ extensions  引入文件时可自动匹配的扩展名
 1. add-asset-html-webpack-plugin
 2. dll-plugin
 
+# 多页面打包
+核心点 多个 entiry 以及配合 htmlwebpackplugin 将打包后的指定文件引入指定html
+
 
 
 
