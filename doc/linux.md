@@ -44,6 +44,7 @@
 
 ## mkdir 
 mkdir /yydata
+* -p  递归创建目录  mkdir -p  api/module/test
 
 ## ls
 * -ld  ex:   ls -ld /yyata   查看yyata目录的信息， l 为长格式， d 为目录
@@ -53,6 +54,7 @@ mkdir /yydata
 
 ## touch 创建文件
 * touch yy.txt  , touch  /yydata/b/yy.txt
+* touch 可以同时常见多个文件，用空格隔开即可，  touch a.txt  b.txt
 
 ## vi
 * vi yy.txt
@@ -78,4 +80,86 @@ echo  "yy study linux" // 打印到屏幕
 echo  "yy study linux" > yy.txt   // 将内容打印到 yy.txt , （直接覆盖文件内容）
 echo  "yy study linux" >> yy.txt   // 将内容追加到 yy.txt 末尾 
 
-  
+* 1>  1>> 为 正常输出（ > 相当于 1>）
+* 2>  2>> 为 错误输出（命令执行错误时将错误内容输出）
+* <0  <<0 输入从定向，输入追加重定向
+
+## cp
+
+* cp error.log  /yylog
+* -r  用于复制目录（cp 默认不能复制目录，需要带参数，还可以用 -a）
+* -a  相当于 pdr,  推荐使用
+* -p  保持属性
+
+## mv
+* mv /log /yydata
+
+## 帮助命令
+
+1. 在命令的前面接  man  如：   man  ls
+2. touch --help
+3. help cd
+
+## find
+
+* find /yylog/ -type f -exec rm -rf {} \;
+* find /yylog/ -type f|xargs rm -f
+* find /yylog/ -type f -name "main.vue"
+* find /yylog/ -type f -name "*.vue"
+* find /yylog/ ! -type f // ！ 表示排除（取反）
+* find /yylog -type f ! -name "*.vue"
+
+* find /yylog/ -type f ! -name "app.vue"|xargs rm -f // 删除目录下所有文件，但保留某个文件
+
+
+### 翻页时，按 /  可进入搜索模式， 按字母 n 跳转下一个搜索到的内容
+
+## rm
+-r  删除目录以及文件
+-f  不用确认删除
+
+## rmdir
+删除空目录， 删除非空目录会报错
+
+## head 查看文件的开头多少行，
+* head app.vue  // 默认为查看前10行
+* head -n  20 app.vue  // 查看前20行
+* head -20 app.vue // 简写 查看前20行
+
+## grep 过滤
+* grep "div" app.vue
+* grep -v "div" app.vue // -v 排除
+
+## sed
+
+* sed -n /div/p app.vue
+-n 取消默认输出（默认为输出所有内容）
+p 打印
+
+## yum
+* yum install tree -y  // -y 为不需要询问
+* yum update // 更新所有软件
+* rpm -ivh  name.rpm
+* rpm -qa tree // 查看已安装的软件包  q 为 query, a 为 all
+
+## tree： 展示目录结构， 需安装 tree
+tree /dev
+
+## alias
+使用 rm 或者 mv 等命令时，一般会有提示是因为该命令有别名，如：直接敲  rm 相当于 rm -i
+
+[root@localhost main]# alias
+alias cp='cp -i'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias l.='ls -d .* --color=auto'
+alias ll='ls -l --color=auto'
+alias ls='ls --color=auto'
+alias mv='mv -i'
+alias rm='rm -i'
+alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
+
+* 取消使用别名的方式
+1. 使用全路径 /bin/mv
+2. \mv  // 转义
