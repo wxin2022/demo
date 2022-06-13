@@ -135,6 +135,7 @@ echo  "yy study linux" >> yy.txt   // 将内容追加到 yy.txt 末尾
 * sed -n /div/p app.vue
 -n 取消默认输出（默认为输出所有内容）
 p 打印
+* -i 改变文件内容
 
 ## yum
 * yum install tree -y  // -y 为不需要询问
@@ -163,3 +164,26 @@ alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-ti
 * 取消使用别名的方式
 1. 使用全路径 /bin/mv
 2. \mv  // 转义
+
+* 命令行设置别名为临时生效，要永久生效见如下
+1. 如果针对单个用户，编辑 配置 家目录下的 bashrc 文件 // ~ 表示用户家目录
+2. 所有用户生效，编辑 /etc 下面的配置文件
+
+## seq 打印序列
+* seq 10  // 打印 1-10
+* seq 5 8 // 打印 2-8
+* seq 2 2 10 // 打印 偶数，中间位为 增量
+* seq -s "+" 5 // -s 指定分割符，默认的分割符为 换行
+
+## tail 取尾部
+用法与 head 一致
+
+## 取文件的 20-30 行
+1. sed -n '20, 30p' index.js
+2. head -30 index.js | tail -11
+
+## awk
+可以过滤，擅长取列
+
+* awk '{print $0}' index.js // $0
+
