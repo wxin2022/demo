@@ -130,12 +130,19 @@ echo  "yy study linux" >> yy.txt   // 将内容追加到 yy.txt 末尾
 * grep "div" app.vue
 * grep -v "div" app.vue // -v 排除
 
+* grep -B 22 'text' index.js // before 取匹配到的行之前 n 行
+* grep -A 22 'text' index.js // after // 取匹配之后的
+* grep -C 22 'text' index.js // 前后各 n 行
+
 ## sed
 
 * sed -n /div/p app.vue
 -n 取消默认输出（默认为输出所有内容）
 p 打印
 * -i 改变文件内容
+
+* 替换： sed -i 's#p#2#g' ss.txt // 把 p 替换成 2， 其中 # 可以使用 其他字符代替（前提是成对出现）, g 全局
+如果不加 g ,则只会替换每一行的第一个
 
 ## yum
 * yum install tree -y  // -y 为不需要询问
@@ -185,5 +192,16 @@ alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-ti
 ## awk
 可以过滤，擅长取列
 
-* awk '{print $0}' index.js // $0
+* awk '{print $0}' index.js // $0 表示所有， $1表示第一列， 默认按照 空格分隔列（连续的多个空格也算一个空格）
+* awk '{print $(NF-1)}' ss.txt // 返回每一行的最后一列 
+* awk -F : '{print $1} index.js // -F 指定分隔符
+* awk '{if (NR>=2 && NR<4) printf $2"\n"}' ss.txt   // 取 m -n 行的 第 x 列， 可使用$0 取 m-n行所有内容
+
+
+## linux 快捷键
+* tab 补全
+* ctrl + a ，光标移动到命令 头部，ctrl + e , 移到尾部
+* ctrl + shift + c, ctr 复制， // ctrl + insert
+* ctrl + shift + v， ctr 粘贴, // shfit + insert
+
 
