@@ -372,6 +372,21 @@ extensions  引入文件时可自动匹配的扩展名
 # 多页面打包
 核心点 多个 entiry 以及配合 htmlwebpackplugin 将打包后的指定文件引入指定html
 
+## vue-cli 2.0
+2.0 版本 存在webpack 配置文件
+
+## vue-cli 3.0 与 webpack
+
+vue-cli工具内部集成了webpack配置，可以 参考vue-cli官网的配置进行配置
+如果非要用webpack 配置，可通过 configureWebpack 属性进行配置
+
+* configureWebpack#
+Type: Object | Function
+
+如果这个值是一个对象，则会通过 webpack-merge 合并到最终的配置中。
+如果这个值是一个函数，则会接收被解析的配置作为参数。该函数既可以修改配置并不返回任何东西，也可以返回一个被克隆或合并过的配置版本。
+
+
 
 
 
