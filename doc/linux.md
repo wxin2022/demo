@@ -39,7 +39,8 @@
 * 会话选项 - 终端 - 选择 linux, 勾选 ANSI颜色，回滚缓冲区 30000
   字体 新宋体 12 ， 精确字体 14 加粗
   光标，断块，绿色
-* 日志 D:\CRTData\%S-%Y-%M-%D.txt， 追加到文件
+* 日志 D:\CRTData\%S-%Y-%M-%D.txt， 勾选在连接上启动记录，追加到文件
+* ctrl + d 退出重新进入，日志就会记录了
 
 
 ## mkdir 
@@ -203,5 +204,44 @@ alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-ti
 * ctrl + a ，光标移动到命令 头部，ctrl + e , 移到尾部
 * ctrl + shift + c, ctr 复制， // ctrl + insert
 * ctrl + shift + v， ctr 粘贴, // shfit + insert
+
+## ssh
+* ssh 服务默认端口为 22，  ssh 为服务， ssl 为加密和解密的
+```console
+查看ssh 安装包
+[root@localhost ~]# rpm -qa openssh openssl
+openssh-7.4p1-21.el7.x86_64
+openssl-1.0.2k-19.el7.x86_64
+```
+
+* ps -ef | grep ssh // 查看ssh 进程
+* netstat -lntup|grep ssh // 查看服务，监听的 ip, 端口
+* ss -lntup|grep ssh // 同 netstat
+
+## 查看 ip 地址
+* ifconfig // centos7 没有该命令
+* ip add 
+
+
+## ssh 连通性检查
+1. ping 192.169.0.143
+2. telnet 192.169.0.143 22
+3. 是否防火墙 , /etc/init.d/iptables stop
+4. ssh 服务是否开启
+
+## 安装 telnet
+yum install telnet -y
+
+## ctr 下 linux 与 windows 传文件（rz-sz）
+1. 安装软件
+  yum install lrzsz -y
+2. 配置 ctr 下载目录， 会话选项 => xmodem
+
+* 上传  rz -y  (输入之后会打开窗口选择要上上传的文件)，不能直接上传目录（需要打包）
+
+* 下载 sz -y /data/index.js
+
+-y 为覆盖下载（或上传）
+
 
 
