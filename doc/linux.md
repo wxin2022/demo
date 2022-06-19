@@ -243,5 +243,23 @@ yum install telnet -y
 
 -y 为覆盖下载（或上传）
 
+## CRT 同时向多个会话发送命令
+* 查看 => 交谈窗口 => 底部右键 勾选 将交谈发送到所有标签
+
+
+## 网卡配置
+* cat /etc/sysconfig/network-scripts/ifcfg-ens33   // ens33 为网卡名称，可能为 eth0 eth1 等等
+
+* ifup eth0可以将网卡启动
+ vim /etc/sysconfig/network-scripts/ifcfg-eth0 把里面的 ONBOOT 设为 yes 即可
+
+## linux 系统信息
+* cat /etc/redhat-release 查看linux 版本
+* uname -r  查看内核
+* uname -m 查看是32位还是64位
+* hostname 查看主机名称
+
+## 用户体系
+
 
 
