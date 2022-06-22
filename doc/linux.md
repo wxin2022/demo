@@ -15,6 +15,11 @@
 
 * ctrl + alt 将鼠标退出虚拟机
 
+## vmvware 激活密匙
+* JZ42H-FP14P-RZFD8-DL07P-2CJ43
+
+* 博客解压密码 www.u14a.net
+
 
 ## 分区
 * /boot  200M , 主分区

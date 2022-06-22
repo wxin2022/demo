@@ -31,3 +31,7 @@
 + ctrl + left  按词语跳转
 
 + ctrl + shift + left 按词语选中
+
+## 下载vscode 慢的解决方法
+* vs code 下载国内镜像站（把官网下载地址中的域名替换为这个）
+ vscode.cdn.azure.cn
