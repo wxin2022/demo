@@ -361,6 +361,10 @@ systemctl list-unit-files | grep enabled
  * diff /etc/ssh/sshd_config /yyblog/sshd_config_bak.f
  * vimdiff /etc/ssh/sshd_config /yyblog/sshd_config_bak.f
 
+ ## sudo
+
+ * visudo   ===   vi /etc/sudoers
+
 
 
 
