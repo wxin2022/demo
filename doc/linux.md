@@ -54,6 +54,7 @@ mkdir /yydata
 
 ## ls
 * -ld  ex:   ls -ld /yyata   查看yyata目录的信息， l 为长格式， d 为目录
+* -d  查看目录， 查看的是仅仅是命令后面接的目录，没有接则为当前目录
 
 ## pwd
 * 查看当前路径
@@ -117,6 +118,9 @@ echo  "yy study linux" >> yy.txt   // 将内容追加到 yy.txt 末尾
 
 * find /yylog/ -type f ! -name "app.vue"|xargs rm -f // 删除目录下所有文件，但保留某个文件
 
+* -a   and 条件同时成立
+* -o   or 或者
+
 
 ### 翻页时，按 /  可进入搜索模式， 按字母 n 跳转下一个搜索到的内容
 
@@ -140,15 +144,23 @@ echo  "yy study linux" >> yy.txt   // 将内容追加到 yy.txt 末尾
 * grep -A 22 'text' index.js // after // 取匹配之后的
 * grep -C 22 'text' index.js // 前后各 n 行
 
-## sed
+* -o  只输出匹配到的内容(grep 默认为输出匹配到内容的整行)
+* -i  忽略大小写
+* -E  匹配多个字符串 以 | 分割
+  grep -E 'test|exclude' dev.js
+
+* grep -E 等价于 egrep
+  egrep "test|loader" dev.js 
+
+## sed 按行处理
 
 * sed -n /div/p app.vue
 -n 取消默认输出（默认为输出所有内容）
 p 打印
 * -i 改变文件内容
-
 * 替换： sed -i 's#p#2#g' ss.txt // 把 p 替换成 2， 其中 # 可以使用 其他字符代替（前提是成对出现）, g 全局
 如果不加 g ,则只会替换每一行的第一个
+* -r  支持正则元字符
 
 ## yum
 * yum install tree -y  // -y 为不需要询问
@@ -202,6 +214,7 @@ alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-ti
 * awk '{print $(NF-1)}' ss.txt // 返回每一行的最后一列 
 * awk -F : '{print $1} index.js // -F 指定分隔符
 * awk '{if (NR>=2 && NR<4) printf $2"\n"}' ss.txt   // 取 m -n 行的 第 x 列， 可使用$0 取 m-n行所有内容
+* $0 表示整行
 
 
 ## linux 快捷键
@@ -225,7 +238,7 @@ openssl-1.0.2k-19.el7.x86_64
 
 ## 查看 ip 地址
 * ifconfig // centos7 没有该命令
-* ip add 
+* ip addr === ip add => 等于 address 中任何开头字串的命令 
 
 
 ## ssh 连通性检查
@@ -255,6 +268,12 @@ yum install telnet -y
 ## 网卡配置
 * cat /etc/sysconfig/network-scripts/ifcfg-ens33   // ens33 为网卡名称，可能为 eth0 eth1 等等
 
+* 配置 为 DHCP
+  bootproto=dhcp
+  onboot=yes
+
+* 重启：  /etc/init.d/network restart
+
 * ifup eth0可以将网卡启动
  vim /etc/sysconfig/network-scripts/ifcfg-eth0 把里面的 ONBOOT 设为 yes 即可
 
@@ -265,6 +284,64 @@ yum install telnet -y
 * hostname 查看主机名称
 
 ## 用户体系
+* 增加用户 useradd yulang
+cat /etc/passwd
+cat /etc/group
+cat /etc/shadow
+
+* 设置密码 passwd yulang
+root 可随时更改用户密码
+
+* 切换用户  su - yulang
+从 root 切换到普通用户不需要密码，从普通用户切换到root需要密码
+
+
+## 特殊字符
+*  \# root 用户标识符  
+例 [root@localhost etc]#   // 由 环境变量 $PS1 控制
+[root@localhost etc]# echo $PS1
+[\u@\h \W]\$
+*  $ 普通用户标识符
+
+
+
+## 关闭selinux
+* 查看 selinux 状态
+[root@localhost etc]# getenforce
+Enforcing
+
+* 更改配置文件
+[root@localhost etc]# sed -i s#SELINUX=enforcing#SELINUX=disabled#g /etc/selinux/config 
+[root@localhost etc]# grep SELINUX /etc/selinux/config 
+
+* 使配置文件生效
+[root@localhost etc]# setenforce 0
+
+
+## 运行级别 7种 （0-6）
+* 查看当前运行级别
+[root@localhost etc]# runlevel
+N 3
+
+## 开机启动服务项优化
+* sshd
+* rsyslog
+* netword
+* crond
+* sysstat
+
+### 处理开机自启动
+* 查看
+chkconfig --list  // 7 之前
+
+* centos7  查看服务
+systemctl list-unit-files | grep enabled
+
+
+### 防火墙
+* 查看状态 systemctl status firewalld
+
+
 
 
 
