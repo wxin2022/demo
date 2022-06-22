@@ -338,8 +338,29 @@ chkconfig --list  // 7 之前
 systemctl list-unit-files | grep enabled
 
 
-### 防火墙
+## 防火墙
 * 查看状态 systemctl status firewalld
+
+## ssh 配置
+
+* 配置文件 vim /etc/ssh/sshd_config 
+
+* 常用配置项
+ 1. #Port 22
+ 2. #ListenAddress 0.0.0.0
+ 3. #PermitRootLogin yes
+ 4. #UseDNS yes
+
+* 重启服务 /etc/init.d/sshd restart
+
+
+ ## vim
+ * :set nu   // 显示行号
+
+ ## diff   vimdiff
+ * diff /etc/ssh/sshd_config /yyblog/sshd_config_bak.f
+ * vimdiff /etc/ssh/sshd_config /yyblog/sshd_config_bak.f
+
 
 
 
