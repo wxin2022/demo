@@ -393,6 +393,15 @@ systemctl list-unit-files | grep enabled
 [root@localhost ~]# cat /etc/locale.conf 
 LANG="zh_CN.UTF-8"
 
+## 前台、后台
+
+* 使用 ctrl + z  将当前任务切换至后台
+
+* 使用 jobs -l  查看当前后台任务
+
+* 使用 fg  %1  将 job 号为1 的任务切换为前台
+
+
 
 
 
