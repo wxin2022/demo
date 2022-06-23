@@ -272,10 +272,16 @@ yum install telnet -y
   bootproto=dhcp
   onboot=yes
 
-* 重启：  /etc/init.d/network restart
+* 重启：  /etc/init.d/network restart4
 
 * ifup eth0可以将网卡启动
  vim /etc/sysconfig/network-scripts/ifcfg-eth0 把里面的 ONBOOT 设为 yes 即可
+
+* 配置固定ip
+BOOTPROTO=static
+DNS1=114.114.114.114
+IPADDR=192.168.126.128
+GATEWAY=192.168.126.255
 
 ## linux 系统信息
 * cat /etc/redhat-release 查看linux 版本
@@ -294,6 +300,9 @@ root 可随时更改用户密码
 
 * 切换用户  su - yulang
 从 root 切换到普通用户不需要密码，从普通用户切换到root需要密码
+
+* 查看用户的组  uid 为 0 表示 root
+  id yulang
 
 
 ## 特殊字符
@@ -364,6 +373,25 @@ systemctl list-unit-files | grep enabled
  ## sudo
 
  * visudo   ===   vi /etc/sudoers
+
+ * sudo useradd yulang
+
+ ## 环境变量
+* 使用 which 查看命令所在路径   which  useradd
+  使用 which 查不到的命令就是内置命令
+
+* 命令所在文件夹可使用 echo $PATH 查看
+
+## 解决linux 字符集
+* 临时更改
+[root@localhost yyblog]# LANG="en_US.UTF-8" 
+
+* 查看字符集
+ echo $LANG
+
+* 配置文件
+[root@localhost ~]# cat /etc/locale.conf 
+LANG="zh_CN.UTF-8"
 
 
 
