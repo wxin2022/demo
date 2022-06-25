@@ -401,6 +401,40 @@ LANG="zh_CN.UTF-8"
 
 * 使用 fg  %1  将 job 号为1 的任务切换为前台
 
+## 与时间服务器同步
+
+* 查看当前系统时间:  date
+
+* 设置当前时间 
+[root@localhost ~]# date -s "2022/05/20 15:30:30"
+
+* 查看日历  cal
+
+* 与时间服务器同步
+[root@localhost ~]# ntpdate time.nist.gov
+24 Jun 21:44:26 ntpdate[20922]: step time server 132.163.96.1 offset 3045740.305098 sec
+
+
+## linux 黑洞
+
+* /dev/null
+
+* 将正确输出扔到黑洞，将错误输出 按 正确（1）方式处理， 三种等价方式
+1. 1>/dev/null 2>/dev/null
+2. 1>/dev/null 2>&1
+3. &>/dev/null
+
+## 为 CRT 终端设置超时时间
+* TMOUT=15  单位 秒
+```console
+[root@localhost ~]# export TMOUT=15
+[root@localhost ~]#  等待输入超时：自动登出
+```
+* 永久生效 写入 /etc/profile
+
+* 执行
+[root@localhost ~]# source /etc/profile
+
 
 
 
