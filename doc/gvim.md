@@ -79,7 +79,17 @@ colorscheme molokai
 
 * p 光标定位到父级目录
 
+* ma 创建文件 （m 之后出现很多菜单项供选择， a 为 add）
+
+* md 删除文件 
+
+* mm 改名
+
 ## emment 插件
 
 * ctrl + y  然后 ,
+
+## vim sourend 插件
+
+## vim wildfire 插件
 
