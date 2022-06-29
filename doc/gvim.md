@@ -62,6 +62,12 @@ set lines=50 columns=120 " 指定窗口大小 行数和列数   liens=999 and co
 // iccd  8986032174379 216 051 B
 
 
+## 主题
+https://github.com/tomasr/molokai
+colorscheme molokai
+
+
+
 ## netd tree 使用
 
 * :NERDTree  启动插件
@@ -69,8 +75,11 @@ set lines=50 columns=120 " 指定窗口大小 行数和列数   liens=999 and co
 
 * 多次按"ctrl+w"，光标自动在左右侧窗口切换
 
+* x  收起父级目录 （光标在文件上则收起文件所在目录，光标在目录上则收起父级目录）
 
+* p 光标定位到父级目录
 
-## 主题
-https://github.com/tomasr/molokai
-colorscheme molokai
+## emment 插件
+
+* ctrl + y  然后 ,
+
