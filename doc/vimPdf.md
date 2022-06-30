@@ -16,7 +16,9 @@
 * 技巧2, 为行尾增加分号
   1. A 进入行尾，输入 分号
   2. 进入下一行，直接按 .
+* . 范式： 一次移动， 一次修改
 ```js
+a2
 import axios from 'axios';
 import userToken from 'store';
 import saveData from '@/api/user';
@@ -41,4 +43,10 @@ export function request() {
 * I = 0i 移动到行头进入插入模式， ^I 则为进入首个非空白字符，并进入插入模式
 * , 为查找f的上一个结果，与 ; 相反
 
-
+* ctrl + a ： 可以将单词所在数值加1， ctrl + x 则实现减1
+  如果光标不在数字上，那么会跳转到数值上并进行操作，
+  按下数字 + ctrl +a 作为增加的量
+  技巧：例如将改行的 0 变为 180时，直接按  180+ctrl+a ，即可实现
+  特殊：以0开头的数值在增加时会认为是8进制，_vimrc 增加 set nrformats= 可实现所有数字解析为10进制
+  
+* daw  : 删除一个完整的单词（无论光标在单词的哪个字符上）
