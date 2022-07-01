@@ -51,8 +51,12 @@ set lines=50 columns=120 " 指定窗口大小 行数和列数   liens=999 and co
 
 2. 在 vim 配置文件 .vimrc (gvim 为_vimrc) 中添加如下信息。
 
+call plug#begin('d:\install\vimPlugins\')
+  Plug 'preservim/nerdtree'
+  Plug 'mattn/emmet-vim'
+  " Plug 'posva/vim-vue'
+call plug#end()
 
- * Plug 'scrooloose/nerdtree'
 
 3. :PlugInstall  // 注意 P 大写
  安装完成
