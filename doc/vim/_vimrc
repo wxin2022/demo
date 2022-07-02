@@ -1,0 +1,63 @@
+
+let mapleader="\<Space>"
+
+nnoremap <leader>l :nohls<CR>
+nnoremap <c-j> 5j
+nnoremap <c-k> 5k
+
+cnoremap <c-p> <up>
+cnoremap <c-n> <down>
+
+nnoremap <silent> [b :bprevious<CR> 
+nnoremap <silent> ]b :bnext<CR> 
+nnoremap <silent> [B :bfirst<CR> 
+nnoremap <silent> ]B :blast<CR>
+
+set guifont=Consolas:h11:cANSI:qDRAFT	"设置字体
+
+syntax on  " 开启代码高亮
+set guioptions-=T " -=T 隐藏工具栏 -=m 隐藏菜单栏设置顶部的gui菜单栏为空，等价于 set go=
+set number
+set tabstop=2  " 设置tab大小为2
+set expandtab " 设置tab效果为插入空格
+set autoindent " 设置为自动缩进
+set shiftwidth=2  " 设置缩进为2空格
+
+set encoding=utf-8
+set fileencoding=utf-8
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim " 解决菜单栏乱码
+
+set mouse=a  " 设置支持鼠标操作
+
+set laststatus=2 " 让底部状态栏变为2行
+set showcmd
+set t_Co=256 " 让颜色支持256
+set backspace=start,eol,indent " 设置退格键可以到上一行（默认不能）
+set hlsearch " 设置代码高亮
+set incsearch " 查找输入时也可以高亮
+
+set scrolloff=4 " 保证底部代码以及顶部至少有五行
+
+set timeoutlen=500  " 设置命令按钮间隔有效时间
+
+set lines=50 columns=120 " 指定窗口大小 行数和列数   liens=999 and columns=999 表示全屏
+
+call plug#begin('d:\install\vimPlugins\')
+Plug 'preservim/nerdtree'
+Plug 'mattn/emmet-vim'  " 标签补签插件
+" Plug 'posva/vim-vue'
+Plug 'mhinz/vim-startify'  " 启动页面美化
+Plug 'Yggdroot/indentLine'  " 缩进线插件
+
+Plug 'vim-airline/vim-airline' " 状态栏优化插件
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'altercation/vim-colors-solarized'
+Plug 'w0ng/vim-hybrid'  " 主题
+Plug 'morhetz/gruvbox'
+call plug#end()
+
+set history=200
+colorscheme gruvbox
+set termguicolors

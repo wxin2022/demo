@@ -67,10 +67,12 @@ call plug#end()
 
 
 ## 主题
-https://github.com/tomasr/molokai
+* https://github.com/tomasr/molokai
 colorscheme molokai
 
-
+* vim-hybird配色：github.com/w0ng/vim-hybrid
+* solarized配色：github.com/altercation/vim-colors-solarized
+* gruvbox配色：github.com/morhetz/gruvbox
 
 ## netd tree 使用
 
