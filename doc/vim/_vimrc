@@ -1,7 +1,7 @@
 
 let mapleader="\<Space>"
 
-nnoremap <leader>l :nohls<CR>
+nnoremap <leader><CR> :nohls<CR>
 nnoremap <c-j> 5j
 nnoremap <c-k> 5k
 
@@ -13,15 +13,26 @@ nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR> 
 nnoremap <silent> ]B :blast<CR>
 
-set guifont=Consolas:h11:cANSI:qDRAFT	"设置字体
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
 
+set guifont=Consolas:h11:cANSI:qDRAFT	"设置字体
+set guioptions= " -=T 隐藏工具栏 -=m 隐藏菜单栏设置顶部的gui菜单栏为空，等价于 set go=
 syntax on  " 开启代码高亮
-set guioptions-=T " -=T 隐藏工具栏 -=m 隐藏菜单栏设置顶部的gui菜单栏为空，等价于 set go=
+syntax enable
+set history=200  " 历史命令保存数量
+
+filetype on " 侦测文件类型 ？？
+
 set number
 set tabstop=2  " 设置tab大小为2
 set expandtab " 设置tab效果为插入空格
 set autoindent " 设置为自动缩进
 set shiftwidth=2  " 设置缩进为2空格
+set smartindent " 智能缩进
+set smarttab " ?? 
 
 set encoding=utf-8
 set fileencoding=utf-8
@@ -31,22 +42,20 @@ source $VIMRUNTIME/menu.vim " 解决菜单栏乱码
 set mouse=a  " 设置支持鼠标操作
 
 set laststatus=2 " 让底部状态栏变为2行
-set showcmd
+set showcmd " 普通模式页显示输入的指令
 set t_Co=256 " 让颜色支持256
 set backspace=start,eol,indent " 设置退格键可以到上一行（默认不能）
 set hlsearch " 设置代码高亮
 set incsearch " 查找输入时也可以高亮
 
 set scrolloff=4 " 保证底部代码以及顶部至少有五行
-
 set timeoutlen=500  " 设置命令按钮间隔有效时间
-
-set lines=50 columns=120 " 指定窗口大小 行数和列数   liens=999 and columns=999 表示全屏
+set lines=999 columns=999 " 指定窗口大小 行数和列数   liens=999 and columns=999 表示全屏
 
 call plug#begin('d:\install\vimPlugins\')
 Plug 'preservim/nerdtree'
-Plug 'mattn/emmet-vim'  " 标签补签插件
-" Plug 'posva/vim-vue'
+" Plug 'mattn/emmet-vim'  " 标签补签插件
+Plug 'posva/vim-vue'
 Plug 'mhinz/vim-startify'  " 启动页面美化
 Plug 'Yggdroot/indentLine'  " 缩进线插件
 
@@ -56,8 +65,42 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
 Plug 'w0ng/vim-hybrid'  " 主题
 Plug 'morhetz/gruvbox'
+
+Plug 'pangloss/vim-javascript' " javascript 插件
+Plug 'gcmt/wildfire.vim'  " 回车选中代码
+Plug 'tpope/vim-surround'  " 好用 
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " coc 智能补全插件
+" Plug 'luochen1990/rainbow'  " 彩色括号对
 call plug#end()
 
-set history=200
+set background=dark
 colorscheme gruvbox
-set termguicolors
+
+let g:javascript_plugin_jsdoc=1  " 设置js支持 jsdoc
+" let g:rainbow_active=1 " 启动彩色括号对，默认 0
+
+" --------------------coc config start
+let g:coc_global_extensions = ['coc-vetur', 'coc-tsserver', 'coc-highlight', 'coc-emmet']
+"  下面一段为 coc tab 补全
+"  inoremap <silent><expr> <TAB>
+"        \ pumvisible() ? "\<C-n>" :
+"        \ CheckBackspace() ? "\<TAB>" :
+"        \ coc#refresh()
+"  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"  
+"  function! CheckBackspace() abort
+"      let col = col('.') - 1
+"        return !col || getline('.')[col - 1]  =~# '\s'
+"      endfunction
+" --------------------coc config end
+
+" 下面这段为 enter 补全
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+
+" ----------------- 打开 vim 使窗口全屏
+if has('gui_running') && has("win32")
+  au GUIEnter * simalt ~x
+endif
+" -----------------
