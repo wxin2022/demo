@@ -2,8 +2,8 @@
 let mapleader="\<Space>"
 
 nnoremap <leader><CR> :nohls<CR>
-nnoremap <c-j> 5j
-nnoremap <c-k> 5k
+noremap <c-j> 5j
+noremap <c-k> 5k
 
 cnoremap <c-p> <up>
 cnoremap <c-n> <down>
@@ -25,6 +25,7 @@ syntax enable
 set history=200  " 历史命令保存数量
 
 filetype on " 侦测文件类型 ？？
+filetype plugin on
 
 set number
 set tabstop=2  " 设置tab大小为2
@@ -52,6 +53,11 @@ set scrolloff=4 " 保证底部代码以及顶部至少有五行
 set timeoutlen=500  " 设置命令按钮间隔有效时间
 set lines=999 columns=999 " 指定窗口大小 行数和列数   liens=999 and columns=999 表示全屏
 
+set list
+set listchars=tab:▸\ ,trail:•
+
+set autochdir  " 设置目标当前目录跟随文件
+
 call plug#begin('d:\install\vimPlugins\')
 Plug 'preservim/nerdtree'
 " Plug 'mattn/emmet-vim'  " 标签补签插件
@@ -71,6 +77,13 @@ Plug 'gcmt/wildfire.vim'  " 回车选中代码
 Plug 'tpope/vim-surround'  " 好用 
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " coc 智能补全插件
 " Plug 'luochen1990/rainbow'  " 彩色括号对
+
+" Plug 'godlygeek/tabular'
+" Plug 'preservim/vim-markdown'
+" Plug 'iamcco/mathjax-support-for-mkdp'
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+" Plug 'iamcco/mathjax-support-for-mkdp'
+" Plug 'iamcco/markdown-preview.vim'
 call plug#end()
 
 set background=dark
