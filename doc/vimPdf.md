@@ -23,6 +23,7 @@ import axios from 'axios';
 import userToken from 'store';
 import saveData from '@/api/user';
 const BASE_URL = 'http://www.jscode.space';
+const merge = ''
 export function request() {
   let header = {
     content-type: 'application/json'
@@ -33,6 +34,7 @@ export function request() {
   }
   return new Promise((resolve,reject) => {
     axios.get('/user/info')
+    console.logo(333)
     resolve()
   })
 }
