@@ -60,7 +60,7 @@ set autochdir  " 设置目标当前目录跟随文件
 
 call plug#begin('d:\install\vimPlugins\')
 Plug 'preservim/nerdtree'
-" Plug 'mattn/emmet-vim'  " 标签补签插件
+Plug 'mattn/emmet-vim'  " 标签补签插件
 Plug 'posva/vim-vue'
 Plug 'mhinz/vim-startify'  " 启动页面美化
 Plug 'Yggdroot/indentLine'  " 缩进线插件
@@ -84,6 +84,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} " coc 智能补全插件
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'iamcco/mathjax-support-for-mkdp'
 " Plug 'iamcco/markdown-preview.vim'
+
+" Plug 'preservim/nerdcommenter'
+Plug 'tomtom/tcomment_vim'
+
 call plug#end()
 
 set background=dark
@@ -117,3 +121,11 @@ if has('gui_running') && has("win32")
   au GUIEnter * simalt ~x
 endif
 " -----------------
+"
+"
+"
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+set termguicolors
+
