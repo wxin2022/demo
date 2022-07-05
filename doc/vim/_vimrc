@@ -18,6 +18,10 @@ nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
 
+map <F2>  :NERDTreeToggle<CR>
+
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
 set guifont=Consolas:h11:cANSI:qDRAFT	"设置字体
 set guioptions= " -=T 隐藏工具栏 -=m 隐藏菜单栏设置顶部的gui菜单栏为空，等价于 set go=
 syntax on  " 开启代码高亮
@@ -34,7 +38,7 @@ set autoindent " 设置为自动缩进
 set shiftwidth=2  " 设置缩进为2空格
 set smartindent " 智能缩进
 set smarttab " ?? 
-
+set smartindent
 set encoding=utf-8
 set fileencoding=utf-8
 source $VIMRUNTIME/delmenu.vim
@@ -88,6 +92,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} " coc 智能补全插件
 " Plug 'preservim/nerdcommenter'
 Plug 'tomtom/tcomment_vim'
 
+Plug 'itchyny/vim-cursorword' " 相同词汇下出现横线
+Plug 'Raimondi/delimitMate'  " 自动补全引号
 call plug#end()
 
 set background=dark
@@ -122,10 +128,8 @@ if has('gui_running') && has("win32")
 endif
 " -----------------
 "
-"
-"
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight') " 高亮插件 好像起作用？
 
 set termguicolors
 
