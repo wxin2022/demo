@@ -20,6 +20,19 @@ nnoremap <leader>l <C-w>l
 
 map <F2>  :NERDTreeToggle<CR>
 
+" 输入模式下，按下 alt + hjkl 为光标移动
+inoremap <M-h> <left>
+inoremap <M-l> <right>
+inoremap <M-j> <down>
+inoremap <M-k> <up>
+
+" 按原始方向键进行窗口大小扩展
+noremap <up> :res +5<CR>
+noremap <down> :res -5<CR>
+noremap <left> :vertical resize-5<CR>
+noremap <right> :vertical resize+5<CR>
+
+
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 set guifont=Consolas:h11:cANSI:qDRAFT	"设置字体
@@ -105,22 +118,22 @@ let g:javascript_plugin_jsdoc=1  " 设置js支持 jsdoc
 " --------------------coc config start
 let g:coc_global_extensions = ['coc-vetur', 'coc-tsserver', 'coc-highlight', 'coc-emmet']
 "  下面一段为 coc tab 补全
-"  inoremap <silent><expr> <TAB>
-"        \ pumvisible() ? "\<C-n>" :
-"        \ CheckBackspace() ? "\<TAB>" :
-"        \ coc#refresh()
-"  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-"  
-"  function! CheckBackspace() abort
-"      let col = col('.') - 1
-"        return !col || getline('.')[col - 1]  =~# '\s'
-"      endfunction
+ inoremap <silent><expr> <TAB>
+       \ pumvisible() ? "\<C-n>" :
+       \ CheckBackspace() ? "\<TAB>" :
+       \ coc#refresh()
+ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+ function! CheckBackspace() abort
+     let col = col('.') - 1
+       return !col || getline('.')[col - 1]  =~# '\s'
+     endfunction
 " --------------------coc config end
 
 " 下面这段为 enter 补全
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"
 
 " ----------------- 打开 vim 使窗口全屏
 if has('gui_running') && has("win32")
