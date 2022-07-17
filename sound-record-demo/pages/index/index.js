@@ -4,7 +4,9 @@ const app = getApp()
 
 Page({
   data: {
-    isPause: false
+    isPause: false,
+    time: 0, // 录音时长
+    timer: null, // 录音计时器
   },
   onShow() {
     if (this.data.isPause) {
@@ -18,20 +20,36 @@ Page({
     r.onStart((e) => {
       console.log('事件：开始录音')
       console.log(e)
+      this.initTimer()
     })
 
     r.onStop((e) => {
       console.log('事件：停止录音')
       console.log(e)
 
-      setTimeout(() => {
-        this.start()
-      }, 500)
+      clearInterval(this.data.timer)
+
+      // setTimeout(() => {
+      //   this.start()
+      // }, 500)
+
+      wx.uploadFile({
+        url: 'http://122.51.146.188:8088/hero/upload',
+        filePath: e.tempFilePath,
+        name: 'file',
+        success: (res) => {
+          console.log('success', res)
+        },
+        fail: (err) => {
+          console.log(err)
+        }
+      })
     })
 
     r.onPause((e) => {
       console.log('事件: 暂停录音')
       console.log(e)
+      clearInterval(this.data.timer)
       this.setData({
         isPause: true
       })
@@ -43,6 +61,7 @@ Page({
       this.setData({
         isPause: false
       })
+      this.initTimer()
     })
 
     r.onError((e) => {
@@ -59,12 +78,23 @@ Page({
       console.log('事件: onInterruptionEnd')
       console.log(e)
     })
+    
 
+    setTimeout(() => {
+      this.start()
+    }, 5000)
+
+  },
+  initTimer(){
+    const timer = setInterval(() => {
+      this.setData({ time: this.data.time + 1 })
+    }, 1000)
+    this.setData({ timer })
   },
   start() {
     let r = wx.getRecorderManager()
     r.start({
-      duration: 10000 // 录音时长 ms
+      duration: 20000 // 录音时长 ms
     })
   },
 
@@ -82,6 +112,4 @@ Page({
     let r = wx.getRecorderManager()
     r.resume()
   }
-
-
 })

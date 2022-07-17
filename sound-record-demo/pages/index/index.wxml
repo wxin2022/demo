@@ -3,4 +3,7 @@
   <button bindtap="pause">暂停</button>
   <button bindtap="stop">停止</button>
   <button bindtap="resume">恢复</button>
+
+
+  <view>{{ time }}</view>
 </view>
