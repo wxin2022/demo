@@ -35,6 +35,7 @@
  -r 查看内核版本号
  -a 查看所有信息
  3.10.30-550   
+查看os: cat /etc/redhat-release
 
 * ifup eth0 启动网卡
 * /etc/init.d/network restart
@@ -46,6 +47,10 @@
   光标，断块，绿色
 * 日志 D:\CRTData\%S-%Y-%M-%D.txt， 勾选在连接上启动记录，追加到文件
 * ctrl + d 退出重新进入，日志就会记录了
+
+## 一些小知识
+* 在输入时，按退格键出现 ^H 特殊字符时，可按 shift + backspace 进行删除字符，按 ctrl + u 快速删除
+* find . -type f | xargs rm -f // 删除当前文件夹下所有文件
 
 
 ## mkdir 
