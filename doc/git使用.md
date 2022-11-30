@@ -7,3 +7,14 @@ ssh-keygen -t rsa -C "wxin2022@163.com"
 git fetch origin
 
 
+## 生成 ssh key
+ssh -keygen -t rsa
+
+
+## 操作
+* git add .
+* git commit -m "描述"
+* git pull origin 
+* git push origin
+
+

@@ -441,6 +441,13 @@ LANG="zh_CN.UTF-8"
 [root@localhost ~]# source /etc/profile
 
 
+## 安装 node
+1. 下载  wget https://nodejs.org/dist/v18.12.1/node-v18.12.1-linux-x64.tar.xz
+2. 解压 tar -xvf node-v18.12.1-linux-x64.tar.xz
+3. 重命名，最好放到 /usr/locale/node 目录下
+4. 配置环境变量 vi /etc/profile
+   加上 export PATH=$PATH:/usr/local/node/bin
+5. 使配置生效 source /etc/profile
 
 
 
