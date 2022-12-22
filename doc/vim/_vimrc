@@ -434,3 +434,8 @@ endfunc
 call Terminal_MetaMode(0)
 
 map <BS> <Esc>xa
+
+" export PATH=$PATH:/soft/node/node-v18/bin
+" export TERM=xterm-256color
+" export MAVEN_HOME=/soft/apache-maven-3.8.2
+" export PATH=${PATH}:${MAVEN_HOME}/bin
