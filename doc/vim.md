@@ -299,4 +299,18 @@ fx 之后使用 ; 号可以继续下一个
 
 *  . 符号可以执行上次操作（比如 v 选中后 多次缩进）
 
+## 显示 true color 
+* export TERM=xterm-256color
 
+* .vimrc
+if $COLORTERM == 'truecolor'
+    set termguicolors
+else
+    set term=xterm
+    set t_Co=256
+endif
+
+## 其他
+* S 清除一行，进入编辑模式，等同于 cc
+* C 从光标位置删除到行尾
+* s 删除当前字符，并进入插入模式, 可加数值删除多个字符

@@ -1,24 +1,27 @@
-
 let mapleader="\<Space>"
+" map <F1> :NERDTreeToggle ./<CR>
+map <M-v> :vsp ~/.vimrc<CR>
+
+" 按下 alt + t 显示/隐藏 tree
+noremap <M-t> :NERDTreeToggle ./<CR>
 
 nnoremap <leader><CR> :nohls<CR>
-noremap <c-j> 5j
-noremap <c-k> 5k
+noremap <C-j> 5j
+noremap <C-k> 5k
 
-cnoremap <c-p> <up>
-cnoremap <c-n> <down>
+cnoremap <C-p> <up>
+cnoremap <C-n> <down>
 
 nnoremap <silent> [b :bprevious<CR> 
 nnoremap <silent> ]b :bnext<CR> 
 nnoremap <silent> [B :bfirst<CR> 
 nnoremap <silent> ]B :blast<CR>
 
-nnoremap <leader>h <C-w>h
-nnoremap <leader>j <C-w>j
-nnoremap <leader>k <C-w>k
-nnoremap <leader>l <C-w>l
-
-map <F2>  :NERDTreeToggle<CR>
+" 普通模式下 按下 alt + hjkl 为移动分隔窗口
+nnoremap <M-h> <c-w>h
+nnoremap <M-j> <c-w>j
+nnoremap <M-k> <c-w>k
+nnoremap <M-l> <c-w>l
 
 " 输入模式下，按下 alt + hjkl 为光标移动
 inoremap <M-h> <left>
@@ -32,19 +35,46 @@ noremap <down> :res -5<CR>
 noremap <left> :vertical resize-5<CR>
 noremap <right> :vertical resize+5<CR>
 
+" 输入模式下将符号成对输入，进入中间
+inoremap ' ''<Esc>i
+inoremap " ""<Esc>i
+inoremap ( ()<Esc>i
+inoremap { {}<Esc>i
+inoremap [ []<Esc>i
+inoremap < <><Esc>i
+inoremap （ （）<Esc>i
 
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
+" 保存
+nmap <leader>w :w<CR>
+inoremap <leader>w <Esc>:w<CR>
 
-set guifont=Consolas:h11:cANSI:qDRAFT	"设置字体
-set guioptions= " -=T 隐藏工具栏 -=m 隐藏菜单栏设置顶部的gui菜单栏为空，等价于 set go=
-syntax on  " 开启代码高亮
+" 将窗口打开为左侧/右侧高度100%
+nnoremap <C-h> <C-w>H
+nnoremap <C-l> <C-w>L
+
+" 插入一行文档注释, 并把光标移动到注释中间
+inoremap <C-m> /**  */<Esc>3ha
+nnoremap <c-m> O/**  */<esc>3ha
+
+" 打开 fzf
+nnoremap <c-p> :fzf<cr>
+
+" 全局查找 ack
+nnoremap <m-f> :ack<cr>
+
+" 改变单词连接方式
+" nnoremap <a-c> <plug>(changecase-camelcase)
+nnoremap <leader>mm <plug>(changecase-camelcase)
+
+
 syntax enable
 set history=200  " 历史命令保存数量
 
-filetype on " 侦测文件类型 ？？
+filetype on " 侦测文件类型 ??
 filetype plugin on
 
 set number
+set relativenumber
 set tabstop=2  " 设置tab大小为2
 set expandtab " 设置tab效果为插入空格
 set autoindent " 设置为自动缩进
@@ -54,31 +84,44 @@ set smarttab " ??
 set smartindent
 set encoding=utf-8
 set fileencoding=utf-8
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim " 解决菜单栏乱码
 
-set mouse=a  " 设置支持鼠标操作
+" set mouse=a  " 设置支持鼠标操作
 
 set laststatus=2 " 让底部状态栏变为2行
 set showcmd " 普通模式页显示输入的指令
-set t_Co=256 " 让颜色支持256
+" set t_Co=256 " 让颜色支持256
 set backspace=start,eol,indent " 设置退格键可以到上一行（默认不能）
 set hlsearch " 设置代码高亮
 set incsearch " 查找输入时也可以高亮
 
 set scrolloff=4 " 保证底部代码以及顶部至少有五行
 set timeoutlen=500  " 设置命令按钮间隔有效时间
-set lines=999 columns=999 " 指定窗口大小 行数和列数   liens=999 and columns=999 表示全屏
+" set lines=999 columns=999 " 指定窗口大小 行数和列数   liens=999 and columns=999 表示全屏
 
 set list
 set listchars=tab:▸\ ,trail:•
+set autochdir
+" set foldenable
+" set foldmethod=indent
+" 有6种方式来折叠代码
+" 1. manual //手工定义折叠
+" 2. indent //用缩进表示折叠
+" 3. expr　 //用表达式来定义折叠
+" 4. syntax //用语法高亮来定义折叠
+" 5. diff //对没有更改的文本进行折叠
+" 6. marker //用标志折叠
 
-set autochdir  " 设置目标当前目录跟随文件
+" 匹配括号高亮的时间（单位是十分之一秒）
+set matchtime=1
 
-call plug#begin('d:\install\vimPlugins\')
+" swap 文件的目录
+set directory=/soft/swap
+set nowrap " 不换行
+
+call plug#begin('/yy/vimPlugin')
 Plug 'preservim/nerdtree'
-Plug 'mattn/emmet-vim'  " 标签补签插件
-Plug 'posva/vim-vue'
+" Plug 'mattn/emmet-vim'  " 标签补签插件
+ Plug 'posva/vim-vue'
 Plug 'mhinz/vim-startify'  " 启动页面美化
 Plug 'Yggdroot/indentLine'  " 缩进线插件
 
@@ -88,61 +131,306 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
 Plug 'w0ng/vim-hybrid'  " 主题
 Plug 'morhetz/gruvbox'
+Plug 'lifepillar/vim-gruvbox8'
+Plug 'poiuto/gruvbox9'
+
+Plug 'jacoborus/tender.vim'
+" colorscheme tender
+Plug 'rakr/vim-one'
+" " colorscheme one
+Plug 'drewtempelmeyer/palenight.vim'
+" " colorscheme palenight
+Plug 'KeitaNakamura/neodark.vim'
+" " colorscheme neodark
+Plug 'iCyMind/NeoSolarized'
+" " colorscheme NeoSolarized
+" Plug 'crusoexia/vim-monokai'
+Plug 'lsdr/monokai'
 
 Plug 'pangloss/vim-javascript' " javascript 插件
-Plug 'gcmt/wildfire.vim'  " 回车选中代码
+" Plug 'gcmt/wildfire.vim'  " 回车选中代码
 Plug 'tpope/vim-surround'  " 好用 
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " coc 智能补全插件
 " Plug 'luochen1990/rainbow'  " 彩色括号对
-
-" Plug 'godlygeek/tabular'
-" Plug 'preservim/vim-markdown'
-" Plug 'iamcco/mathjax-support-for-mkdp'
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-" Plug 'iamcco/mathjax-support-for-mkdp'
-" Plug 'iamcco/markdown-preview.vim'
-
-" Plug 'preservim/nerdcommenter'
+"
+" " Plug 'godlygeek/tabular'
+" " Plug 'preservim/vim-markdown'
+" " Plug 'iamcco/mathjax-support-for-mkdp'
+" " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() },
+" 'for': ['markdown', 'vim-plug']}
+" " Plug 'iamcco/mathjax-support-for-mkdp'
+" " Plug 'iamcco/markdown-preview.vim'
+"
+" " Plug 'preservim/nerdcommenter'
 Plug 'tomtom/tcomment_vim'
+"
+" Plug 'itchyny/vim-cursorword' " 相同词汇下出现横线
+" Plug 'Raimondi/delimitMate'  " 自动补全引号
+"
+Plug 'patstockwell/vim-monokai-tasty'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'elzr/vim-json'
+Plug 'styled-components/vim-styled-components'
+Plug 'itchyny/lightline.vim'
 
-Plug 'itchyny/vim-cursorword' " 相同词汇下出现横线
-Plug 'Raimondi/delimitMate'  " 自动补全引号
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive' " git
+Plug 'chemzqm/wxapp.vim' " wxml
+Plug 'adelarsq/vim-matchit' " 跳转 hmtl end 标签
+Plug 'robhurring/changecase.vim' " 驼峰转换, 有问题
+Plug 'mileszs/ack.vim' " 文本搜索
+" curl https://beyondgrep.com/ack-v3.6.0 > ~/bin/ack && chmod 0755 ~/bin/ack
+
 call plug#end()
 
-set background=dark
-colorscheme gruvbox
+set background=dark " dark light
+colorscheme gruvbox8
+" let g:gruvbox_italicize_strings = 0
 
-let g:javascript_plugin_jsdoc=1  " 设置js支持 jsdoc
-" let g:rainbow_active=1 " 启动彩色括号对，默认 0
+" let g:vim_monokai_tasty_machine_tint = 1
+" colorscheme vim-monokai-tasty
+
+" let g:indentLine_enabled = 1      " 使插件生效
+" let g:indentLine_char = '¦'       " 设置缩进线字符  ¦, ┆, │, ⎸, or ▏ '|', '¦', '┆', '┊'
+" let g:indentLine_conceallevel = 2 " 使插件正常运行
+" let g:indentLine_setColors = 0
+" let g:indentLine_color_term = 88 " 设置对齐线颜色
+
 
 " --------------------coc config start
-let g:coc_global_extensions = ['coc-vetur', 'coc-tsserver', 'coc-highlight', 'coc-emmet']
-"  下面一段为 coc tab 补全
- inoremap <silent><expr> <TAB>
-       \ pumvisible() ? "\<C-n>" :
-       \ CheckBackspace() ? "\<TAB>" :
-       \ coc#refresh()
- inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+let g:coc_global_extensions = ['coc-vetur',
+      \ 'coc-tsserver',
+      \ 'coc-highlight',
+      \ 'coc-emmet',
+      \ 'coc-wxml',
+      \ 'coc-json',
+      \ 'coc-html',
+      \ 'coc-css',
+      \ 'coc-java',
+      \ 'coc-snippets']
 
- function! CheckBackspace() abort
-     let col = col('.') - 1
-       return !col || getline('.')[col - 1]  =~# '\s'
-     endfunction
-" --------------------coc config end
 
-" 下面这段为 enter 补全
-" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-"
+" May need for vim (not neovim) since coc.nvim calculate byte offset by count
+" utf-8 byte sequence.
+set encoding=utf-8
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
 
-" ----------------- 打开 vim 使窗口全屏
-if has('gui_running') && has("win32")
-  au GUIEnter * simalt ~x
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
 endif
-" -----------------
-"
 
-" autocmd CursorHold * silent call CocActionAsync('highlight') " 高亮插件 好像起作用？
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-set termguicolors
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying code actions to the selected code block.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for apply code actions at the cursor position.
+nmap <leader>ac  <Plug>(coc-codeaction-cursor)
+" Remap keys for apply code actions affect whole buffer.
+nmap <leader>as  <Plug>(coc-codeaction-source)
+" Apply the most preferred quickfix action to fix diagnostic on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Remap keys for apply refactor code actions.
+nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
+xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+
+" Run the Code Lens action on the current line.
+nmap <leader>cl  <Plug>(coc-codelens-action)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocActionAsync('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" end
+
+" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" set termguicolors
+
+if has("termguicolors")
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+else
+  set term=xterm
+  set t_Co=256
+endif
+
+
+" 使vim可以识别 alt 键
+function! Terminal_MetaMode(mode)
+    set ttimeout
+    if $TMUX != ''
+        set ttimeoutlen=30
+    elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
+        set ttimeoutlen=80
+    endif
+    if has('nvim') || has('gui_running')
+        return
+    endif
+    function! s:metacode(mode, key)
+        if a:mode == 0
+            exec "set <M-".a:key.">=\e".a:key
+        else
+            exec "set <M-".a:key.">=\e]{0}".a:key."~"
+        endif
+    endfunc
+    for i in range(10)
+        call s:metacode(a:mode, nr2char(char2nr('0') + i))
+    endfor
+    for i in range(26)
+        call s:metacode(a:mode, nr2char(char2nr('a') + i))
+        call s:metacode(a:mode, nr2char(char2nr('A') + i))
+    endfor
+    if a:mode != 0
+        for c in [',', '.', '/', ';', '[', ']', '{', '}']
+            call s:metacode(a:mode, c)
+        endfor
+        for c in ['?', ':', '-', '_']
+            call s:metacode(a:mode, c)
+        endfor
+    else
+        for c in [',', '.', '/', ';', '{', '}']
+            call s:metacode(a:mode, c)
+        endfor
+        for c in ['?', ':', '-', '_']
+            call s:metacode(a:mode, c)
+        endfor
+    endif
+endfunc
+
+call Terminal_MetaMode(0)
+
+map <BS> <Esc>xa

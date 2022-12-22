@@ -449,7 +449,6 @@ LANG="zh_CN.UTF-8"
    加上 export PATH=$PATH:/usr/local/node/bin
 5. 使配置生效 source /etc/profile
 
-
-
-
+## 设置颜色为 彩色
+export TERM=xterm-256color
 
